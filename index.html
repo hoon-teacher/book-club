@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>동물농장 유형 테스트</title>
-<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gowun+Dodum&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gowun+Dodum&display=swap" rel="stylesheet">
 <style>
   :root{
     --paper:#F2E8D2;
@@ -33,7 +33,7 @@
     color:var(--flag);text-align:center;margin-bottom:10px;
   }
   h1{
-    font-family:'Black Han Sans',sans-serif;
+    font-family:'Do Hyeon',sans-serif;
     font-size:42px;line-height:1.15;text-align:center;
     letter-spacing:.01em;
   }
@@ -45,7 +45,7 @@
   .rule span{font-size:13px;letter-spacing:.2em;}
   .btn{
     display:block;width:100%;border:none;cursor:pointer;
-    font-family:'Black Han Sans',sans-serif;font-size:19px;letter-spacing:.05em;
+    font-family:'Do Hyeon',sans-serif;font-size:19px;letter-spacing:.05em;
     background:var(--flag);color:var(--paper);
     padding:16px;border-radius:4px;
     box-shadow:4px 4px 0 var(--ink);
@@ -91,7 +91,7 @@
   .progress i.done{background:var(--field);}
   .progress i.now{background:var(--flag);}
   .qnum{
-    font-family:'Black Han Sans',sans-serif;color:var(--flag);
+    font-family:'Do Hyeon',sans-serif;color:var(--flag);
     font-size:15px;letter-spacing:.15em;margin-bottom:8px;
   }
   .qtext{
@@ -107,6 +107,14 @@
     transition:transform .07s, background .07s;
   }
   .opt:active{transform:scale(.98);background:var(--paper-deep);}
+  .opt.sel{background:var(--field);color:var(--paper);border-color:var(--field);}
+  .navrow{display:flex;gap:10px;margin-top:6px;}
+  .navrow button{
+    flex:1;cursor:pointer;font-family:'Do Hyeon',sans-serif;font-size:15px;
+    padding:11px;border-radius:3px;border:2px solid var(--ink);
+    background:transparent;color:var(--ink);
+  }
+  .navrow button:disabled{opacity:.3;cursor:default;}
   .qcard{animation:slideIn .28s ease both;}
   @keyframes slideIn{from{opacity:0;transform:translateX(24px);}to{opacity:1;transform:none;}}
 
@@ -117,7 +125,7 @@
     border:4px solid var(--flag);display:flex;flex-direction:column;
     align-items:center;justify-content:center;gap:4px;
     transform:rotate(-7deg);color:var(--flag);
-    font-family:'Black Han Sans',sans-serif;
+    font-family:'Do Hyeon',sans-serif;
     animation:stampIn .45s cubic-bezier(.2,1.6,.4,1) both .25s;
   }
   #doneScreen .seal b{font-size:26px;}
@@ -135,11 +143,11 @@
     padding:14px 16px;margin-bottom:12px;
   }
   .person .row{display:flex;justify-content:space-between;align-items:center;gap:8px;}
-  .person .pname{font-family:'Black Han Sans',sans-serif;font-size:19px;}
+  .person .pname{font-family:'Do Hyeon',sans-serif;font-size:19px;}
   .person .ptype{font-size:13px;color:var(--field);}
   .person .acts{display:flex;gap:8px;margin-top:10px;}
   .person .acts button{
-    flex:1;font-family:'Black Han Sans',sans-serif;font-size:14px;cursor:pointer;
+    flex:1;font-family:'Do Hyeon',sans-serif;font-size:14px;cursor:pointer;
     padding:9px;border-radius:3px;border:2px solid var(--ink);
   }
   .person .reveal-btn{background:var(--flag);color:var(--paper);border-color:var(--flag) !important;}
@@ -156,20 +164,20 @@
   }
   #revealOverlay .stage{max-width:680px;width:100%;}
   .rv-name{
-    font-family:'Black Han Sans',sans-serif;font-size:min(13vw,64px);
+    font-family:'Do Hyeon',sans-serif;font-size:min(13vw,64px);
     color:var(--hay);line-height:1.2;
   }
   .rv-ask{font-size:min(5.5vw,24px);margin-top:14px;line-height:1.6;word-break:keep-all;}
   .rv-hint{margin-top:34px;font-size:14px;color:#bfae8a;animation:blink 1.4s infinite;}
   @keyframes blink{0%,100%{opacity:1;}50%{opacity:.25;}}
   .rv-count{
-    font-family:'Black Han Sans',sans-serif;font-size:min(40vw,200px);color:var(--flag);
+    font-family:'Do Hyeon',sans-serif;font-size:min(40vw,200px);color:var(--flag);
     animation:pop .9s ease both;
   }
   @keyframes pop{0%{transform:scale(.3);opacity:0;}45%{transform:scale(1.15);opacity:1;}100%{transform:scale(1);}}
   .rv-emoji{font-size:min(30vw,130px);animation:stampBig .55s cubic-bezier(.2,1.7,.4,1) both;}
   .rv-type{
-    font-family:'Black Han Sans',sans-serif;font-size:min(12vw,58px);
+    font-family:'Do Hyeon',sans-serif;font-size:min(12vw,58px);
     color:var(--hay);margin-top:4px;
     animation:stampBig .55s cubic-bezier(.2,1.7,.4,1) both .15s;
   }
@@ -184,7 +192,7 @@
   .rv-card .qlabel{
     display:inline-block;background:var(--flag);color:var(--paper);
     font-size:12px;letter-spacing:.18em;padding:3px 10px;border-radius:2px;
-    margin-bottom:8px;font-family:'Black Han Sans',sans-serif;
+    margin-bottom:8px;font-family:'Do Hyeon',sans-serif;
   }
   .rv-quote{
     margin:14px 0;padding-left:14px;border-left:3px solid var(--hay);
@@ -323,7 +331,7 @@ const QUESTIONS = [
        ["핵심 규칙 몇 개를 내가 정하고 일관되게 끌고 간다","napoleon"],
        ["규칙보다 관계. 아이들 마음 상태부터 살핀다","clover"],
        ["규칙이 몇 개든 결국 지켜지는 건 따로 있다고 생각한다","benjamin"]] },
-  { q:"학교 행사 준비, 일손이 부족하다. 나는?",
+  { q:"내가 담당자인 학교 행사, 준비할 일손이 부족하다. 나는?",
     o:[["새벽같이 나와서 내 몸으로 메운다","boxer"],
        ["역할 분담표를 만들어 효율적으로 돌린다","snowball"],
        ["\"이번 행사 잘 되면 우리 학년 위상이 달라져요~\" 동기부여 멘트를 날린다","squealer"],
@@ -363,28 +371,42 @@ let userName="", qIdx=0, answers=[];
 function startTest(){
   userName = document.getElementById("nameInput").value.trim();
   if(!userName){ alert("이름을 입력해주세요!"); return; }
-  qIdx=0; answers=[];
+  qIdx=0; answers=new Array(QUESTIONS.length).fill(null);
   show("quizScreen");
   renderQ();
 }
 function renderQ(){
   const bar=document.getElementById("progressBar");
   bar.innerHTML = QUESTIONS.map((_,i)=>
-    `<i class="${i<qIdx?'done':i===qIdx?'now':''}"></i>`).join("");
+    `<i class="${i===qIdx?'now':answers[i]!==null?'done':''}"></i>`).join("");
   const q=QUESTIONS[qIdx];
+  const isLast = qIdx===QUESTIONS.length-1;
   document.getElementById("qcardHolder").innerHTML = `
     <div class="qcard">
       <p class="qnum">Q${qIdx+1} / ${QUESTIONS.length}</p>
       <p class="qtext">${q.q}</p>
-      ${q.o.map((o,i)=>`<button class="opt" onclick="pick(${i})">${o[0]}</button>`).join("")}
+      ${q.o.map((o,i)=>`<button class="opt${answers[qIdx]===i?' sel':''}" onclick="pick(${i})">${o[0]}</button>`).join("")}
+      <div class="navrow">
+        <button onclick="goPrev()" ${qIdx===0?'disabled':''}>← 이전 문항</button>
+        <button onclick="goNext()" ${answers[qIdx]===null?'disabled':''}>${isLast?'제출하기':'다음 문항 →'}</button>
+      </div>
     </div>`;
   window.scrollTo(0,0);
 }
 function pick(i){
-  answers.push(QUESTIONS[qIdx].o[i][1]);
-  qIdx++;
-  if(qIdx < QUESTIONS.length){ renderQ(); }
-  else{ finish(); }
+  answers[qIdx]=i;
+  if(qIdx < QUESTIONS.length-1){ qIdx++; renderQ(); }
+  else{ renderQ(); }  /* 마지막 문항은 '제출하기' 버튼으로 확정 */
+}
+function goPrev(){ if(qIdx>0){ qIdx--; renderQ(); } }
+function goNext(){
+  if(answers[qIdx]===null) return;
+  if(qIdx < QUESTIONS.length-1){ qIdx++; renderQ(); }
+  else{
+    const missing = answers.findIndex(a=>a===null);
+    if(missing!==-1){ alert(`Q${missing+1} 문항이 비어 있어요!`); qIdx=missing; renderQ(); return; }
+    finish();
+  }
 }
 function judge(arr){
   const score={};
@@ -394,11 +416,12 @@ function judge(arr){
   return {type:best, score};
 }
 async function finish(){
-  const r=judge(answers);
+  const picked = answers.map((a,i)=>QUESTIONS[i].o[a][1]);
+  const r=judge(picked);
   show("doneScreen");
   try{
     await db.collection("results").add({
-      name:userName, type:r.type, score:r.score, answers:answers,
+      name:userName, type:r.type, score:r.score, answers:picked,
       ts:firebase.firestore.FieldValue.serverTimestamp()
     });
   }catch(e){
