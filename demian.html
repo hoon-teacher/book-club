@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>데미안 · 나의 알을 깨는 질문</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Gowun+Dodum&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
   :root{
     --night:#171826;      /* 밤하늘 — 알을 깨고 나온 세계 */
@@ -21,7 +21,7 @@
   }
   *{margin:0;padding:0;box-sizing:border-box;}
   body{
-    font-family:'Gowun Dodum',sans-serif;
+    font-family:'Noto Sans KR',sans-serif;
     background:var(--shell);
     color:var(--ink);
     -webkit-font-smoothing:antialiased;
@@ -35,7 +35,7 @@
     color:var(--clay);text-align:center;margin-bottom:14px;
   }
   h1{
-    font-family:'Nanum Myeongjo',serif;font-weight:800;
+    font-family:'Noto Sans KR',sans-serif;font-weight:900;
     font-size:34px;line-height:1.32;text-align:center;
     letter-spacing:-.01em;
   }
@@ -47,7 +47,7 @@
 
   .btn{
     display:block;width:100%;border:none;cursor:pointer;
-    font-family:'Nanum Myeongjo',serif;font-weight:700;font-size:18px;
+    font-family:'Noto Sans KR',sans-serif;font-weight:700;font-size:18px;
     background:var(--ink);color:var(--shell);
     padding:16px;border-radius:2px;letter-spacing:.02em;
     transition:transform .08s, background .15s;
@@ -77,11 +77,11 @@
   .manifesto{
     border-left:2px solid var(--amber);background:var(--shell2);
     padding:16px 18px;margin:24px 0;border-radius:0 3px 3px 0;
-    font-family:'Nanum Myeongjo',serif;font-size:16px;line-height:1.9;
+    font-family:'Noto Sans KR',sans-serif;font-size:16px;line-height:1.9;
     color:#3a3526;
   }
   .manifesto .src{display:block;margin-top:8px;font-size:12.5px;
-    font-family:'Gowun Dodum';color:var(--clay);letter-spacing:.04em;}
+    font-family:'Noto Sans KR';color:var(--clay);letter-spacing:.04em;}
   label{font-size:13px;letter-spacing:.06em;display:block;margin:0 0 7px 2px;color:#5a5340;}
   input[type=text]{
     width:100%;padding:14px;font-size:16px;font-family:inherit;
@@ -101,20 +101,20 @@
   .qcard{animation:rise .35s ease both;}
   @keyframes rise{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:none;}}
   .q-eyebrow{font-size:11px;letter-spacing:.3em;color:var(--clay);text-transform:uppercase;margin-bottom:10px;}
-  .q-num{font-family:'Nanum Myeongjo',serif;color:var(--amber);font-weight:700;font-size:14px;margin-bottom:6px;}
-  .q-text{font-family:'Nanum Myeongjo',serif;font-weight:700;font-size:21px;line-height:1.6;
+  .q-num{font-family:'Noto Sans KR',sans-serif;color:var(--amber);font-weight:700;font-size:14px;margin-bottom:6px;}
+  .q-text{font-family:'Noto Sans KR',sans-serif;font-weight:700;font-size:21px;line-height:1.6;
     margin-bottom:8px;word-break:keep-all;}
   .q-hint{font-size:13.5px;color:#6a6049;margin-bottom:18px;line-height:1.7;word-break:keep-all;}
   textarea{
     width:100%;min-height:170px;padding:15px;font-size:15.5px;line-height:1.75;
-    font-family:'Nanum Myeongjo',serif;color:var(--ink);
+    font-family:'Noto Sans KR',sans-serif;color:var(--ink);
     border:1.5px solid var(--line);border-radius:3px;background:#FAF5E8;
     resize:vertical;outline:none;
   }
   textarea:focus{border-color:var(--amber);}
   textarea::placeholder{color:#b3a888;font-style:italic;}
   .navrow{display:flex;gap:10px;margin-top:16px;}
-  .navrow button{flex:1;cursor:pointer;font-family:'Nanum Myeongjo',serif;font-weight:700;
+  .navrow button{flex:1;cursor:pointer;font-family:'Noto Sans KR',sans-serif;font-weight:700;
     font-size:15px;padding:13px;border-radius:2px;border:1.5px solid var(--ink);
     background:transparent;color:var(--ink);transition:background .12s;}
   .navrow button:hover:not(:disabled){background:rgba(30,30,45,.05);}
@@ -129,18 +129,18 @@
   .done-egg .crack{stroke:var(--amber);stroke-width:3;fill:none;stroke-linecap:round;
     filter:url(#eggGlow);animation:pulse 2.4s ease-in-out infinite;}
   @keyframes pulse{0%,100%{opacity:.55;}50%{opacity:1;}}
-  .done-title{font-family:'Nanum Myeongjo',serif;font-weight:800;font-size:26px;margin:8px 0 16px;}
+  .done-title{font-family:'Noto Sans KR',sans-serif;font-weight:900;font-size:26px;margin:8px 0 16px;}
   .done-sub{font-size:15px;line-height:1.95;color:#4a432f;word-break:keep-all;}
 
   /* ===== 사회자 ===== */
-  .sec-label{font-family:'Nanum Myeongjo',serif;font-weight:700;font-size:13px;
+  .sec-label{font-family:'Noto Sans KR',sans-serif;font-weight:700;font-size:13px;
     letter-spacing:.16em;color:var(--clay);text-align:center;margin:30px 0 14px;}
   .person{border:1.5px solid var(--line);border-radius:3px;background:#FAF5E8;
     padding:13px 16px;margin-bottom:10px;display:flex;justify-content:space-between;
     align-items:center;gap:8px;}
-  .person .pname{font-family:'Nanum Myeongjo',serif;font-weight:700;font-size:18px;}
+  .person .pname{font-family:'Noto Sans KR',sans-serif;font-weight:700;font-size:18px;}
   .person .pacts{display:flex;gap:7px;}
-  .person .pacts button{cursor:pointer;font-family:'Gowun Dodum';font-size:13px;
+  .person .pacts button{cursor:pointer;font-family:'Noto Sans KR';font-size:13px;
     padding:8px 12px;border-radius:2px;border:1.5px solid var(--ink);background:transparent;color:var(--ink);}
   .person .pacts .v{background:var(--ink);color:var(--shell);border-color:var(--ink);}
   .empty{text-align:center;color:#9c9078;font-size:14px;padding:26px 0;line-height:1.8;}
@@ -155,16 +155,16 @@
   .st-inner{max-width:640px;margin:0 auto;}
   .st-eyebrow{font-size:11px;letter-spacing:.34em;text-transform:uppercase;
     color:var(--amber);text-align:center;margin-bottom:18px;}
-  .st-q{font-family:'Nanum Myeongjo',serif;font-weight:800;
+  .st-q{font-family:'Noto Sans KR',sans-serif;font-weight:900;
     font-size:min(7vw,30px);line-height:1.5;text-align:center;
     word-break:keep-all;color:var(--shell);}
   .st-lead{font-size:min(4.3vw,16.5px);line-height:1.85;color:var(--mist);
     text-align:center;margin-top:14px;word-break:keep-all;}
   .ans{background:rgba(236,227,208,.05);border:1px solid rgba(236,227,208,.18);
     border-radius:6px;padding:15px 17px;margin-top:14px;animation:ansUp .45s ease both;}
-  .ans .who{font-family:'Nanum Myeongjo',serif;font-weight:700;color:var(--amber-soft);
+  .ans .who{font-family:'Noto Sans KR',sans-serif;font-weight:700;color:var(--amber-soft);
     font-size:15px;margin-bottom:7px;}
-  .ans .txt{font-family:'Nanum Myeongjo',serif;font-size:16px;line-height:1.85;
+  .ans .txt{font-family:'Noto Sans KR',sans-serif;font-size:16px;line-height:1.85;
     color:#E9E1CF;white-space:pre-wrap;word-break:break-word;}
   .ans .blank{color:var(--mist);font-style:italic;font-size:14px;}
   @keyframes ansUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
@@ -173,9 +173,12 @@
   .st-subs p{font-size:min(4.2vw,16px);line-height:1.8;color:#E3DBC8;
     padding-left:20px;position:relative;margin-bottom:11px;word-break:keep-all;}
   .st-subs p:last-child{margin-bottom:0;}
+  .st-subs p.subhead{font-family:'Noto Sans KR',sans-serif;font-weight:700;
+    color:var(--amber-soft);padding-left:0;margin-bottom:13px;font-size:14px;letter-spacing:.04em;}
+  .st-subs p.subhead::before{content:none;}
   .st-subs p::before{content:"◦";position:absolute;left:2px;top:0;color:var(--amber);}
   .st-nav{display:flex;gap:10px;margin-top:28px;}
-  .st-nav button{flex:1;cursor:pointer;font-family:'Nanum Myeongjo',serif;font-weight:700;
+  .st-nav button{flex:1;cursor:pointer;font-family:'Noto Sans KR',sans-serif;font-weight:700;
     font-size:16px;padding:13px;border-radius:2px;
     background:transparent;color:var(--shell);border:1.5px solid rgba(236,227,208,.45);}
   .st-nav button:hover:not(:disabled){background:rgba(236,227,208,.08);}
@@ -183,7 +186,7 @@
   .st-nav button:disabled{opacity:.25;cursor:default;}
   .st-close{display:block;margin:26px auto 0;background:transparent;
     border:1px solid rgba(236,227,208,.4);color:var(--shell);
-    padding:9px 28px;border-radius:2px;cursor:pointer;font-family:'Gowun Dodum';font-size:13px;}
+    padding:9px 28px;border-radius:2px;cursor:pointer;font-family:'Noto Sans KR';font-size:13px;}
   .st-close:hover{background:rgba(236,227,208,.08);}
 
   @media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important;}}
@@ -258,11 +261,10 @@
     <p class="sec-label">참가자 응답 현황</p>
     <div id="personList"><div class="empty">불러오는 중…</div></div>
 
-    <p class="sec-label">함께 펼쳐 보기</p>
-    <button class="btn" onclick="startQView()">질문별로 네 사람의 답 펼치기</button>
-
-    <p class="sec-label">토론 진행</p>
-    <button class="btn amber" onclick="startTalk()">토론 모드 시작</button>
+    <p class="sec-label">모임 진행</p>
+    <button class="btn amber" onclick="startFlow()">모임 진행 시작</button>
+    <p style="text-align:center;font-size:12.5px;color:#8a7f66;margin-top:10px;line-height:1.7;">
+      워밍업 → 질문 1~6(각자 답 + 심화) → 마무리 순으로<br>한 화면씩 넘어갑니다.</p>
 
     <button class="btn ghost" onclick="location.reload()" style="margin-top:24px;">처음으로</button>
   </section>
@@ -302,65 +304,57 @@ const QUESTIONS = [
   { eyebrow:"두 세계",
     q:"당신의 '밝은 세계'와 '어두운 세계'는 각각 무엇인가요?",
     hint:"싱클레어는 경건한 가정(밝음)과 비밀·죄의식(어둠) 사이에서 자랍니다. 요즘 당신은 어느 쪽에 더 머물고 있나요?",
-    ph:"예) 나의 밝은 세계는…  나의 어두운 세계는…" },
+    ph:"예) 나의 밝은 세계는…  나의 어두운 세계는…",
+    deepen:["우리는 정말 두 세계를 나눠 살고 있을까요?",
+            "어른이 된다는 건 어둠을 없애는 일일까요, 끌어안는 일일까요?"] },
   { eyebrow:"알",
     q:"지금 당신이 깨고 나와야 할 '알'은 무엇인가요?",
     hint:"익숙하지만 이제는 벗어나고 싶은 세계, 나를 가두고 있는 껍데기.",
-    ph:"내가 깨야 할 껍데기는…" },
+    ph:"내가 깨야 할 껍데기는…",
+    deepen:["그 껍데기는 나를 가두는 걸까요, 지켜주는 걸까요?",
+            "깨지 못하고 있는 진짜 이유는 무엇일까요?"] },
   { eyebrow:"데미안",
     q:"당신의 '데미안'은 누구(무엇)인가요?",
     hint:"결정적인 순간 방향을 알려준 사람, 혹은 내 안의 목소리. 있었다면 어떤 순간이었나요?",
-    ph:"나에게 데미안 같은 존재는…" },
+    ph:"나에게 데미안 같은 존재는…",
+    deepen:["나는 누군가에게 '데미안'이 되어준 적이 있나요?"] },
   { eyebrow:"카인의 표식",
     q:"남들과 달라서 거리감의 대상이 된 적 있나요? 그 '다름'은 약점이었나요, 표식이었나요?",
     hint:"데미안은 카인을 악인이 아니라 '남다른 표식을 지녀 두려움의 대상이 된 자'로 읽습니다.",
-    ph:"나의 다름은…" },
+    ph:"나의 다름은…",
+    deepen:["교실에서 '남다른 아이'를 우리는 어떻게 바라보고 있나요?",
+            "다름이 약점이 아니라 표식이 되려면 무엇이 필요할까요?"] },
   { eyebrow:"교사로서",
     q:"우리는 아이들에게 '밝은 세계'만 보여주고 있지는 않을까요?",
     hint:"아이의 '어두운 면'(분노, 질투, 비밀)을 당신은 교실에서 어떻게 대하나요?",
-    ph:"아이의 어두운 면을 마주할 때 나는…" },
-  { eyebrow:"열린 질문",
+    ph:"아이의 어두운 면을 마주할 때 나는…",
+    deepen:["'좋은 사람이 되라'는 교육은 한쪽 세계만 가르치는 건 아닐까요?",
+            "선과 악을 함께 끌어안는(아프락사스적) 교육이 가능할까요?"] },
+  { eyebrow:"열린 질문 · 가장 뜨거운 주제",
     q:"데미안은 실존 인물이었을까요, 싱클레어의 또 다른 자아였을까요?",
     hint:"정답이 없는 질문입니다. 당신은 어떻게 읽었나요(또는 읽고 싶나요)? 그 근거는?",
-    ph:"내가 읽은 데미안은…" }
+    ph:"내가 읽은 데미안은…",
+    deepen:["거울 속에서 데미안을 본 마지막 장면, 어떻게 읽으셨나요?",
+            "둘 중 무엇이든, 헤세가 말하려던 건 무엇이었을까요?"] }
 ];
 
 /* =========================================================
-   토론 주제 (6)
+   워밍업 · 마무리 (특정 질문에 묶이지 않는 화면)
    ========================================================= */
-const TOPICS = [
-  { eyebrow:"워밍업",
-    q:"첫인상, 그리고 한 문장",
-    lead:"본격적인 이야기에 앞서 가볍게 시작합니다.",
-    subs:["데미안을 다 읽고 난 첫 느낌을 한 단어로 말한다면?",
-          "가장 마음에 밑줄 그은 문장과 그 이유는?"] },
-  { eyebrow:"두 세계",
-    q:"밝음과 어둠, 그리고 우리",
-    lead:"싱클레어는 밝은 세계와 어두운 세계 사이에서 흔들립니다.",
-    subs:["우리는 정말 두 세계를 나눠 살고 있을까요?",
-          "어른이 된다는 건 어둠을 없애는 일일까요, 끌어안는 일일까요?"] },
-  { eyebrow:"아프락사스",
-    q:"알을 깨는 새, 선과 악을 함께 품기",
-    lead:"아프락사스는 신과 악마를 한 몸에 지닌 신입니다. 세상을 둘로 쪼개지 말라는 책의 핵심 사상.",
-    subs:["선과 악을 모두 끌어안는다는 게 현실에서 가능할까요?",
-          "'좋은 사람'이 되라는 교육은 아이에게 한쪽 세계만 가르치는 건 아닐까요?"] },
-  { eyebrow:"열린 질문 · 가장 뜨거운 주제",
-    q:"데미안은 실존인가, 또 다른 자아인가",
-    lead:"각자 6번 답을 꺼내 근거와 함께 이야기해 봅시다. 정답은 없습니다.",
-    subs:["거울 속에서 데미안을 본 마지막 장면, 어떻게 읽으셨나요?",
-          "데미안이 실재했다고 보는 쪽 / 내면의 자아라 보는 쪽, 각자의 근거는?",
-          "둘 중 무엇이든, 헤세가 말하려던 건 무엇이었을까요?"] },
-  { eyebrow:"카인의 표식",
-    q:"'다름'에 대하여",
-    lead:"표식을 지닌 자는 두려움의 대상이 되지만, 동시에 선택받은 자이기도 합니다.",
-    subs:["교실에서 '남다른 아이'를 우리는 어떻게 보고 있나요?",
-          "나의 '다름'이 약점이 아니라 표식이었던 순간이 있었나요?"] },
-  { eyebrow:"마무리",
-    q:"교실의 데미안, 그리고 오늘 가져갈 한 문장",
-    lead:"성장 소설을 교사의 자리에서 다시 읽습니다.",
-    subs:["우리 반 아이들에게 '데미안 같은 어른'이 되어 줄 수 있을까요?",
-          "오늘 모임에서 각자 가져가는 한 문장은?"] }
-];
+const WARMUP = {
+  eyebrow:"워밍업",
+  q:"첫인상, 그리고 한 문장",
+  lead:"본격적인 이야기에 앞서 가볍게 시작합니다.",
+  subs:["데미안을 읽고 난 첫 느낌을 한 단어로 말한다면?",
+        "가장 마음에 밑줄 그은 문장과 그 이유는?"]
+};
+const CLOSING = {
+  eyebrow:"마무리",
+  q:"교실의 데미안, 그리고 오늘 가져갈 한 문장",
+  lead:"성장 소설을 교사의 자리에서 닫습니다.",
+  subs:["우리 반 아이들에게 '데미안 같은 어른'이 되어 줄 수 있을까요?",
+        "오늘 모임에서 각자 가져가는 한 문장은?"]
+};
 
 /* =========================================================
    참가자 — 성찰 카드 작성
@@ -486,59 +480,59 @@ function startPersonView(i){
   ov.scrollTop=0;
 }
 
-/* ---- 질문별 함께 보기 : 한 질문 + 네 사람의 답 ---- */
-let qvIdx=0;
-function startQView(){
-  if(roster.length===0){ alert("아직 응답이 없습니다."); return; }
-  qvIdx=0; renderQView();
+/* ---- 통합 모임 진행 : 워밍업 → 질문1~6(각자 답+심화) → 마무리 ---- */
+let flow=[], fIdx=0;
+function startFlow(){
+  if(roster.length===0){
+    if(!confirm("아직 응답이 없습니다. 그래도 진행 화면을 열까요?")) return;
+  }
+  flow=[];
+  flow.push({type:"warmup"});
+  QUESTIONS.forEach((_,i)=>flow.push({type:"q", qi:i}));
+  flow.push({type:"closing"});
+  fIdx=0; renderFlow();
 }
-function renderQView(){
-  const q=QUESTIONS[qvIdx];
-  const isLast = qvIdx===QUESTIONS.length-1;
+function renderFlow(){
+  const step=flow[fIdx];
+  const isFirst=fIdx===0, isLast=fIdx===flow.length-1;
   const ov=$("stage"); ov.classList.remove("hidden");
-  ov.innerHTML=`<div class="st-inner">
-      <p class="st-eyebrow">${q.eyebrow} · 질문 ${qvIdx+1}/${QUESTIONS.length}</p>
-      <p class="st-q">${esc(q.q)}</p>
-      ${roster.map(r=>{
-        const a=(r.answers&&r.answers[qvIdx])?r.answers[qvIdx]:"";
-        return `<div class="ans">
-          <div class="who">${esc(r.name)}</div>
-          <div class="txt">${a.trim()?esc(a):'<span class="blank">— 비워둠 —</span>'}</div>
-        </div>`;
-      }).join("")}
-      <div class="st-nav">
-        <button onclick="qvPrev()" ${qvIdx===0?'disabled':''}>← 이전 질문</button>
-        <button class="go" onclick="${isLast?'closeStage()':'qvNext()'}">${isLast?'마치기':'다음 질문 →'}</button>
-      </div>
-      <button class="st-close" onclick="closeStage()">닫기</button>
-    </div>`;
-  ov.scrollTop=0;
-}
-function qvPrev(){ if(qvIdx>0){ qvIdx--; renderQView(); } }
-function qvNext(){ if(qvIdx<QUESTIONS.length-1){ qvIdx++; renderQView(); } }
+  let html="";
 
-/* ---- 토론 모드 ---- */
-let tIdx=0;
-function startTalk(){ tIdx=0; renderTalk(); }
-function renderTalk(){
-  const t=TOPICS[tIdx];
-  const isLast = tIdx===TOPICS.length-1;
-  const ov=$("stage"); ov.classList.remove("hidden");
-  ov.innerHTML=`<div class="st-inner">
-      <p class="st-eyebrow">${t.eyebrow} · 주제 ${tIdx+1}/${TOPICS.length}</p>
+  if(step.type==="warmup" || step.type==="closing"){
+    const t = step.type==="warmup"?WARMUP:CLOSING;
+    html=`
+      <p class="st-eyebrow">${t.eyebrow} · ${fIdx+1}/${flow.length}</p>
       <p class="st-q">${esc(t.q)}</p>
       <p class="st-lead">${esc(t.lead)}</p>
-      <div class="st-subs">${t.subs.map(s=>`<p>${esc(s)}</p>`).join("")}</div>
+      <div class="st-subs">${t.subs.map(s=>`<p>${esc(s)}</p>`).join("")}</div>`;
+  } else {
+    const q=QUESTIONS[step.qi];
+    const answers = roster.map(r=>{
+      const a=(r.answers&&r.answers[step.qi])?r.answers[step.qi]:"";
+      return `<div class="ans">
+        <div class="who">${esc(r.name)}</div>
+        <div class="txt">${a.trim()?esc(a):'<span class="blank">— 비워둠 —</span>'}</div>
+      </div>`;
+    }).join("") || `<p class="st-lead">아직 모인 답이 없습니다.</p>`;
+    html=`
+      <p class="st-eyebrow">${q.eyebrow} · 질문 ${step.qi+1}/${QUESTIONS.length}</p>
+      <p class="st-q">${esc(q.q)}</p>
+      ${answers}
+      <div class="st-subs"><p class="subhead">더 들어가 볼까요?</p>${q.deepen.map(s=>`<p>${esc(s)}</p>`).join("")}</div>`;
+  }
+
+  ov.innerHTML=`<div class="st-inner">
+      ${html}
       <div class="st-nav">
-        <button onclick="talkPrev()" ${tIdx===0?'disabled':''}>← 이전 주제</button>
-        <button class="go" onclick="${isLast?'closeStage()':'talkNext()'}">${isLast?'토론 마치기':'다음 주제 →'}</button>
+        <button onclick="flowPrev()" ${isFirst?'disabled':''}>← 이전</button>
+        <button class="go" onclick="${isLast?'closeStage()':'flowNext()'}">${isLast?'모임 마치기':'다음 →'}</button>
       </div>
-      <button class="st-close" onclick="closeStage()">닫기</button>
+      <button class="st-close" onclick="closeStage()">진행 닫기</button>
     </div>`;
   ov.scrollTop=0;
 }
-function talkPrev(){ if(tIdx>0){ tIdx--; renderTalk(); } }
-function talkNext(){ if(tIdx<TOPICS.length-1){ tIdx++; renderTalk(); } }
+function flowPrev(){ if(fIdx>0){ fIdx--; renderFlow(); } }
+function flowNext(){ if(fIdx<flow.length-1){ fIdx++; renderFlow(); } }
 
 function closeStage(){ $("stage").classList.add("hidden"); $("stage").innerHTML=""; }
 </script>
