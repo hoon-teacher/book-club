@@ -177,6 +177,25 @@
     color:var(--amber-soft);padding-left:0;margin-bottom:13px;font-size:14px;letter-spacing:.04em;}
   .st-subs p.subhead::before{content:none;}
   .st-subs p::before{content:"◦";position:absolute;left:2px;top:0;color:var(--amber);}
+
+  /* 마무리 한마디 입력 */
+  .cl-intro{font-size:min(4.2vw,15.5px);color:var(--mist);text-align:center;
+    margin:18px 0 18px;line-height:1.8;word-break:keep-all;}
+  .cl-row{display:flex;gap:9px;align-items:stretch;margin-bottom:10px;}
+  .cl-row input{font-family:'Noto Sans KR',sans-serif;font-size:15px;
+    padding:12px 13px;border-radius:5px;outline:none;color:#F1E9D6;
+    background:rgba(236,227,208,.07);border:1px solid rgba(236,227,208,.25);}
+  .cl-row input::placeholder{color:#8d86a2;}
+  .cl-row input:focus{border-color:var(--amber);background:rgba(236,227,208,.1);}
+  .cl-row .cl-name{flex:0 0 92px;min-width:0;font-weight:700;color:var(--amber-soft);text-align:center;}
+  .cl-row .cl-text{flex:1;min-width:0;}
+  .cl-save{display:block;width:100%;margin-top:6px;cursor:pointer;
+    font-family:'Noto Sans KR',sans-serif;font-weight:700;font-size:16px;
+    padding:13px;border-radius:4px;border:none;background:var(--amber);color:var(--night);}
+  .cl-save:hover{background:var(--amber-soft);}
+  .cl-saved-note{text-align:center;color:var(--amber-soft);font-weight:700;
+    font-size:14px;margin:4px 0 14px;letter-spacing:.03em;}
+  .cl-meta{text-align:center;color:var(--mist);font-size:12.5px;margin-bottom:18px;}
   .st-nav{display:flex;gap:10px;margin-top:28px;}
   .st-nav button{flex:1;cursor:pointer;font-family:'Noto Sans KR',sans-serif;font-weight:700;
     font-size:16px;padding:13px;border-radius:2px;
@@ -265,6 +284,9 @@
     <button class="btn amber" onclick="startFlow()">모임 진행 시작</button>
     <p style="text-align:center;font-size:12.5px;color:#8a7f66;margin-top:10px;line-height:1.7;">
       워밍업 → 질문 1~6(각자 답 + 심화) → 마무리 순으로<br>한 화면씩 넘어갑니다.</p>
+
+    <p class="sec-label">기록 보관함</p>
+    <button class="btn ghost" onclick="openArchive()">지난 모임의 한마디 보기</button>
 
     <button class="btn ghost" onclick="location.reload()" style="margin-top:24px;">처음으로</button>
   </section>
@@ -481,7 +503,7 @@ function startPersonView(i){
 }
 
 /* ---- 통합 모임 진행 : 워밍업 → 질문1~6(각자 답+심화) → 마무리 ---- */
-let flow=[], fIdx=0;
+let flow=[], fIdx=0, closingSaved=false, closingDraft=[];
 function startFlow(){
   if(roster.length===0){
     if(!confirm("아직 응답이 없습니다. 그래도 진행 화면을 열까요?")) return;
@@ -490,7 +512,7 @@ function startFlow(){
   flow.push({type:"warmup"});
   QUESTIONS.forEach((_,i)=>flow.push({type:"q", qi:i}));
   flow.push({type:"closing"});
-  fIdx=0; renderFlow();
+  fIdx=0; closingSaved=false; closingDraft=[]; renderFlow();
 }
 function renderFlow(){
   const step=flow[fIdx];
@@ -498,13 +520,38 @@ function renderFlow(){
   const ov=$("stage"); ov.classList.remove("hidden");
   let html="";
 
-  if(step.type==="warmup" || step.type==="closing"){
-    const t = step.type==="warmup"?WARMUP:CLOSING;
+  if(step.type==="warmup"){
+    const t = WARMUP;
     html=`
       <p class="st-eyebrow">${t.eyebrow} · ${fIdx+1}/${flow.length}</p>
       <p class="st-q">${esc(t.q)}</p>
       <p class="st-lead">${esc(t.lead)}</p>
       <div class="st-subs">${t.subs.map(s=>`<p>${esc(s)}</p>`).join("")}</div>`;
+  } else if(step.type==="closing"){
+    const t = CLOSING;
+    let body;
+    if(closingSaved){
+      body = `<p class="cl-saved-note">✓ 오늘의 한마디가 기록되었습니다</p>
+        ${closingDraft.filter(e=>e.name||e.text).map(e=>`<div class="ans">
+          <div class="who">${esc(e.name||'이름 없음')}</div>
+          <div class="txt">${e.text.trim()?esc(e.text):'<span class="blank">— 비워둠 —</span>'}</div>
+        </div>`).join("")}`;
+    } else {
+      const src = closingDraft.length ? closingDraft
+                : (roster.length ? roster.map(r=>({name:r.name,text:""}))
+                : [{name:"",text:""},{name:"",text:""},{name:"",text:""},{name:"",text:""}]);
+      body = `<p class="cl-intro">각자 '오늘 가져갈 한 문장'을 남겨주세요.<br>기록으로 저장됩니다.</p>
+        ${src.map(e=>`<div class="cl-row">
+          <input class="cl-name" type="text" value="${esc(e.name)}" placeholder="이름" maxlength="12">
+          <input class="cl-text" type="text" value="${esc(e.text)}" placeholder="오늘 가져갈 한 문장">
+        </div>`).join("")}
+        <button class="cl-save" onclick="saveClosing()">이 한마디들 기록하기</button>`;
+    }
+    html=`
+      <p class="st-eyebrow">${t.eyebrow} · ${fIdx+1}/${flow.length}</p>
+      <p class="st-q">${esc(t.q)}</p>
+      <p class="st-lead">${esc(t.lead)}</p>
+      ${body}`;
   } else {
     const q=QUESTIONS[step.qi];
     const answers = roster.map(r=>{
@@ -531,8 +578,78 @@ function renderFlow(){
     </div>`;
   ov.scrollTop=0;
 }
-function flowPrev(){ if(fIdx>0){ fIdx--; renderFlow(); } }
-function flowNext(){ if(fIdx<flow.length-1){ fIdx++; renderFlow(); } }
+function captureClosingDraft(){
+  if(flow[fIdx] && flow[fIdx].type==="closing" && !closingSaved){
+    const rows=[...document.querySelectorAll('.cl-row')];
+    if(rows.length){
+      closingDraft = rows.map(r=>({
+        name:r.querySelector('.cl-name').value,
+        text:r.querySelector('.cl-text').value
+      }));
+    }
+  }
+}
+function flowPrev(){ captureClosingDraft(); if(fIdx>0){ fIdx--; renderFlow(); } }
+function flowNext(){ captureClosingDraft(); if(fIdx<flow.length-1){ fIdx++; renderFlow(); } }
+
+/* ---- 마무리 한마디 저장 ---- */
+async function saveClosing(){
+  const rows=[...document.querySelectorAll('.cl-row')];
+  const entries=rows.map(r=>({
+    name:r.querySelector('.cl-name').value.trim(),
+    text:r.querySelector('.cl-text').value.trim()
+  })).filter(e=>e.name||e.text);
+  if(entries.length===0){ alert("한마디를 한 개 이상 입력해주세요."); return; }
+  try{
+    await db.collection("demian_closing").add({
+      entries, ts:firebase.firestore.FieldValue.serverTimestamp()
+    });
+    closingDraft=entries; closingSaved=true; renderFlow();
+  }catch(e){
+    alert("기록 저장에 실패했습니다.\n"+e.message);
+  }
+}
+
+/* ---- 지난 마무리 기록 열람 (사회자) ---- */
+async function openArchive(){
+  const ov=$("stage"); ov.classList.remove("hidden");
+  ov.innerHTML=`<div class="st-inner"><p class="st-eyebrow">기록</p>
+    <p class="st-q">지난 모임의 한마디</p><p class="st-lead">불러오는 중…</p></div>`;
+  try{
+    const snap=await db.collection("demian_closing").orderBy("ts","desc").get();
+    if(snap.empty){
+      ov.innerHTML=`<div class="st-inner"><p class="st-eyebrow">기록</p>
+        <p class="st-q">지난 모임의 한마디</p>
+        <p class="st-lead">아직 저장된 기록이 없습니다.</p>
+        <button class="st-close" onclick="closeStage()">닫기</button></div>`;
+      return;
+    }
+    let blocks="";
+    snap.forEach(doc=>{
+      const d=doc.data();
+      const dt=d.ts&&d.ts.toDate?d.ts.toDate():null;
+      const dateStr=dt?`${dt.getFullYear()}.${String(dt.getMonth()+1).padStart(2,'0')}.${String(dt.getDate()).padStart(2,'0')}`:"날짜 미상";
+      blocks+=`<p class="cl-meta">📖 ${dateStr} · ${doc.id.slice(0,4)}</p>
+        ${(d.entries||[]).map(e=>`<div class="ans">
+          <div class="who">${esc(e.name||'이름 없음')}</div>
+          <div class="txt">${e.text&&e.text.trim()?esc(e.text):'<span class="blank">— 비워둠 —</span>'}</div>
+        </div>`).join("")}
+        <button class="st-close" style="margin:8px auto 26px" onclick="deleteArchive('${doc.id}')">이 기록 삭제</button>`;
+    });
+    ov.innerHTML=`<div class="st-inner"><p class="st-eyebrow">기록</p>
+      <p class="st-q">지난 모임의 한마디</p>${blocks}
+      <button class="st-close" onclick="closeStage()">닫기</button></div>`;
+    ov.scrollTop=0;
+  }catch(e){
+    ov.innerHTML=`<div class="st-inner"><p class="st-lead">불러오기 실패: ${esc(e.message)}</p>
+      <button class="st-close" onclick="closeStage()">닫기</button></div>`;
+  }
+}
+async function deleteArchive(id){
+  if(!confirm("이 기록을 삭제할까요?")) return;
+  try{ await db.collection("demian_closing").doc(id).delete(); openArchive(); }
+  catch(e){ alert("삭제 실패: "+e.message); }
+}
 
 function closeStage(){ $("stage").classList.add("hidden"); $("stage").innerHTML=""; }
 </script>
