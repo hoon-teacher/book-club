@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>데미안 · 나의 알을 깨는 질문</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Gowun+Dodum&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --night:#171826;      /* 밤하늘 — 알을 깨고 나온 세계 */
+    --night2:#23243C;
+    --shell:#ECE3D0;      /* 달걀껍데기 — 알 속의 세계 */
+    --shell2:#E3D7BE;
+    --ink:#1E1E2D;
+    --amber:#D2982F;      /* 아프락사스의 빛 (강조) */
+    --amber-soft:#E6BB63;
+    --clay:#A85C42;       /* 새벽의 흙빛 (보조) */
+    --line:#CBB88D;       /* 껍데기 위 가는 선 */
+    --mist:#A39CBA;       /* 밤하늘 위 보조 텍스트 */
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    font-family:'Gowun Dodum',sans-serif;
+    background:var(--shell);
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+    line-height:1.6;
+  }
+  .wrap{max-width:480px;margin:0 auto;padding:30px 20px 64px;}
+
+  /* ===== 공통 ===== */
+  .eyebrow{
+    font-size:11px;letter-spacing:.42em;text-transform:uppercase;
+    color:var(--clay);text-align:center;margin-bottom:14px;
+  }
+  h1{
+    font-family:'Nanum Myeongjo',serif;font-weight:800;
+    font-size:34px;line-height:1.32;text-align:center;
+    letter-spacing:-.01em;
+  }
+  h1 .amber{color:var(--amber);}
+  /* 균열 모양 구분선 — 시그니처 */
+  .crackline{display:block;width:100%;height:14px;margin:20px 0;opacity:.9;}
+  .crackline path{stroke:var(--line);stroke-width:1.4;fill:none;}
+  .crackline.gold path{stroke:var(--amber);}
+
+  .btn{
+    display:block;width:100%;border:none;cursor:pointer;
+    font-family:'Nanum Myeongjo',serif;font-weight:700;font-size:18px;
+    background:var(--ink);color:var(--shell);
+    padding:16px;border-radius:2px;letter-spacing:.02em;
+    transition:transform .08s, background .15s;
+  }
+  .btn:hover{background:#2c2c40;}
+  .btn:active{transform:scale(.985);}
+  .btn.amber{background:var(--amber);color:var(--ink);}
+  .btn.amber:hover{background:var(--amber-soft);}
+  .btn.ghost{background:transparent;color:var(--ink);
+    border:1.5px solid var(--ink);font-size:15px;padding:13px;}
+  .btn.ghost:hover{background:rgba(30,30,45,.05);}
+  .hidden{display:none !important;}
+  button:focus-visible, input:focus-visible, textarea:focus-visible{
+    outline:2.5px solid var(--clay);outline-offset:2px;}
+
+  /* ===== 시작 화면 ===== */
+  .egg-wrap{display:flex;justify-content:center;margin:14px 0 4px;}
+  .egg{width:150px;height:auto;}
+  .egg .shellpath{fill:url(#eggGrad);stroke:#D9C9A6;stroke-width:1;}
+  .egg .crack{
+    stroke:var(--amber);stroke-width:2.4;fill:none;stroke-linecap:round;
+    filter:url(#eggGlow);
+    stroke-dasharray:340;stroke-dashoffset:340;
+    animation:crackOpen 2.2s ease forwards .3s;
+  }
+  @keyframes crackOpen{to{stroke-dashoffset:0;}}
+  .manifesto{
+    border-left:2px solid var(--amber);background:var(--shell2);
+    padding:16px 18px;margin:24px 0;border-radius:0 3px 3px 0;
+    font-family:'Nanum Myeongjo',serif;font-size:16px;line-height:1.9;
+    color:#3a3526;
+  }
+  .manifesto .src{display:block;margin-top:8px;font-size:12.5px;
+    font-family:'Gowun Dodum';color:var(--clay);letter-spacing:.04em;}
+  label{font-size:13px;letter-spacing:.06em;display:block;margin:0 0 7px 2px;color:#5a5340;}
+  input[type=text]{
+    width:100%;padding:14px;font-size:16px;font-family:inherit;
+    border:1.5px solid var(--line);border-radius:2px;background:#FAF5E8;
+    margin-bottom:16px;outline:none;color:var(--ink);
+  }
+  input:focus{border-color:var(--amber);}
+  .admin-link{text-align:center;margin-top:42px;font-size:12px;color:#9c9078;
+    cursor:pointer;text-decoration:underline;letter-spacing:.05em;}
+  .lead-note{text-align:center;font-size:13.5px;color:#6a6049;margin:-4px 0 22px;line-height:1.7;}
+
+  /* ===== 성찰 카드 화면 ===== */
+  .progress{display:flex;gap:5px;margin-bottom:24px;}
+  .progress i{flex:1;height:3px;background:var(--line);border-radius:2px;transition:background .3s;}
+  .progress i.done{background:var(--clay);}
+  .progress i.now{background:var(--amber);}
+  .qcard{animation:rise .35s ease both;}
+  @keyframes rise{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:none;}}
+  .q-eyebrow{font-size:11px;letter-spacing:.3em;color:var(--clay);text-transform:uppercase;margin-bottom:10px;}
+  .q-num{font-family:'Nanum Myeongjo',serif;color:var(--amber);font-weight:700;font-size:14px;margin-bottom:6px;}
+  .q-text{font-family:'Nanum Myeongjo',serif;font-weight:700;font-size:21px;line-height:1.6;
+    margin-bottom:8px;word-break:keep-all;}
+  .q-hint{font-size:13.5px;color:#6a6049;margin-bottom:18px;line-height:1.7;word-break:keep-all;}
+  textarea{
+    width:100%;min-height:170px;padding:15px;font-size:15.5px;line-height:1.75;
+    font-family:'Nanum Myeongjo',serif;color:var(--ink);
+    border:1.5px solid var(--line);border-radius:3px;background:#FAF5E8;
+    resize:vertical;outline:none;
+  }
+  textarea:focus{border-color:var(--amber);}
+  textarea::placeholder{color:#b3a888;font-style:italic;}
+  .navrow{display:flex;gap:10px;margin-top:16px;}
+  .navrow button{flex:1;cursor:pointer;font-family:'Nanum Myeongjo',serif;font-weight:700;
+    font-size:15px;padding:13px;border-radius:2px;border:1.5px solid var(--ink);
+    background:transparent;color:var(--ink);transition:background .12s;}
+  .navrow button:hover:not(:disabled){background:rgba(30,30,45,.05);}
+  .navrow button.go{background:var(--ink);color:var(--shell);}
+  .navrow button.go:hover{background:#2c2c40;}
+  .navrow button:disabled{opacity:.3;cursor:default;}
+
+  /* ===== 완료 화면 ===== */
+  #doneScreen{text-align:center;padding-top:24px;}
+  .done-egg{width:130px;margin:18px auto 6px;display:block;}
+  .done-egg .shellpath{fill:url(#eggGrad);stroke:#D9C9A6;stroke-width:1;}
+  .done-egg .crack{stroke:var(--amber);stroke-width:3;fill:none;stroke-linecap:round;
+    filter:url(#eggGlow);animation:pulse 2.4s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{opacity:.55;}50%{opacity:1;}}
+  .done-title{font-family:'Nanum Myeongjo',serif;font-weight:800;font-size:26px;margin:8px 0 16px;}
+  .done-sub{font-size:15px;line-height:1.95;color:#4a432f;word-break:keep-all;}
+
+  /* ===== 사회자 ===== */
+  .sec-label{font-family:'Nanum Myeongjo',serif;font-weight:700;font-size:13px;
+    letter-spacing:.16em;color:var(--clay);text-align:center;margin:30px 0 14px;}
+  .person{border:1.5px solid var(--line);border-radius:3px;background:#FAF5E8;
+    padding:13px 16px;margin-bottom:10px;display:flex;justify-content:space-between;
+    align-items:center;gap:8px;}
+  .person .pname{font-family:'Nanum Myeongjo',serif;font-weight:700;font-size:18px;}
+  .person .pacts{display:flex;gap:7px;}
+  .person .pacts button{cursor:pointer;font-family:'Gowun Dodum';font-size:13px;
+    padding:8px 12px;border-radius:2px;border:1.5px solid var(--ink);background:transparent;color:var(--ink);}
+  .person .pacts .v{background:var(--ink);color:var(--shell);border-color:var(--ink);}
+  .empty{text-align:center;color:#9c9078;font-size:14px;padding:26px 0;line-height:1.8;}
+
+  /* ===== 어두운 오버레이 (공개 · 토론) ===== */
+  #stage{
+    position:fixed;inset:0;z-index:50;overflow-y:auto;
+    background:var(--night);
+    background-image:radial-gradient(circle at 50% 12%, rgba(210,152,47,.16), transparent 55%);
+    color:var(--shell);padding:32px 22px 40px;
+  }
+  .st-inner{max-width:640px;margin:0 auto;}
+  .st-eyebrow{font-size:11px;letter-spacing:.34em;text-transform:uppercase;
+    color:var(--amber);text-align:center;margin-bottom:18px;}
+  .st-q{font-family:'Nanum Myeongjo',serif;font-weight:800;
+    font-size:min(7vw,30px);line-height:1.5;text-align:center;
+    word-break:keep-all;color:var(--shell);}
+  .st-lead{font-size:min(4.3vw,16.5px);line-height:1.85;color:var(--mist);
+    text-align:center;margin-top:14px;word-break:keep-all;}
+  .ans{background:rgba(236,227,208,.05);border:1px solid rgba(236,227,208,.18);
+    border-radius:6px;padding:15px 17px;margin-top:14px;animation:ansUp .45s ease both;}
+  .ans .who{font-family:'Nanum Myeongjo',serif;font-weight:700;color:var(--amber-soft);
+    font-size:15px;margin-bottom:7px;}
+  .ans .txt{font-family:'Nanum Myeongjo',serif;font-size:16px;line-height:1.85;
+    color:#E9E1CF;white-space:pre-wrap;word-break:break-word;}
+  .ans .blank{color:var(--mist);font-style:italic;font-size:14px;}
+  @keyframes ansUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
+  .st-subs{background:rgba(236,227,208,.05);border:1px solid rgba(236,227,208,.2);
+    border-radius:6px;padding:16px 18px;margin-top:22px;text-align:left;}
+  .st-subs p{font-size:min(4.2vw,16px);line-height:1.8;color:#E3DBC8;
+    padding-left:20px;position:relative;margin-bottom:11px;word-break:keep-all;}
+  .st-subs p:last-child{margin-bottom:0;}
+  .st-subs p::before{content:"◦";position:absolute;left:2px;top:0;color:var(--amber);}
+  .st-nav{display:flex;gap:10px;margin-top:28px;}
+  .st-nav button{flex:1;cursor:pointer;font-family:'Nanum Myeongjo',serif;font-weight:700;
+    font-size:16px;padding:13px;border-radius:2px;
+    background:transparent;color:var(--shell);border:1.5px solid rgba(236,227,208,.45);}
+  .st-nav button:hover:not(:disabled){background:rgba(236,227,208,.08);}
+  .st-nav button.go{background:var(--amber);color:var(--night);border-color:var(--amber);}
+  .st-nav button:disabled{opacity:.25;cursor:default;}
+  .st-close{display:block;margin:26px auto 0;background:transparent;
+    border:1px solid rgba(236,227,208,.4);color:var(--shell);
+    padding:9px 28px;border-radius:2px;cursor:pointer;font-family:'Gowun Dodum';font-size:13px;}
+  .st-close:hover{background:rgba(236,227,208,.08);}
+
+  @media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important;}}
+</style>
+</head>
+<body>
+<!-- 공유 SVG 정의 (알 그라데이션 · 글로우) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <radialGradient id="eggGrad" cx="42%" cy="34%" r="75%">
+      <stop offset="0%" stop-color="#FAF3E3"/>
+      <stop offset="100%" stop-color="#E0D2B4"/>
+    </radialGradient>
+    <filter id="eggGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2.4" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+</svg>
+
+<div class="wrap">
+
+  <!-- ===== 시작 ===== -->
+  <section id="startScreen">
+    <p class="eyebrow">Emil Sinclair's Young Story</p>
+    <h1>데미안<br><span class="amber">나의 알을 깨는</span> 질문</h1>
+    <div class="egg-wrap">
+      <svg class="egg" viewBox="0 0 200 250" aria-hidden="true">
+        <ellipse class="shellpath" cx="100" cy="132" rx="80" ry="106"/>
+        <path class="crack" d="M100 28 L90 72 L110 100 L88 134 L108 170 L92 206 L101 236"/>
+      </svg>
+    </div>
+    <div class="manifesto">
+      “새는 알을 깨고 나온다. 알은 곧 세계다. 태어나려는 자는 한 세계를 깨뜨려야 한다.”
+      <span class="src">— 헤르만 헤세, 데미안</span>
+    </div>
+    <p class="lead-note">여섯 개의 질문이 당신의 '알'을 들여다봅니다.<br>답은 봉인되었다가, 모임에서 함께 깨집니다.</p>
+    <label for="nameInput">이름</label>
+    <input type="text" id="nameInput" placeholder="이름을 입력하세요" maxlength="12" autocomplete="off">
+    <button class="btn amber" onclick="startCards()">시작하기</button>
+    <p class="admin-link" onclick="openAdmin()">사회자 입장</p>
+  </section>
+
+  <!-- ===== 성찰 카드 ===== -->
+  <section id="cardScreen" class="hidden">
+    <div class="progress" id="progressBar"></div>
+    <div id="cardHolder"></div>
+  </section>
+
+  <!-- ===== 완료 ===== -->
+  <section id="doneScreen" class="hidden">
+    <svg class="done-egg" viewBox="0 0 200 250" aria-hidden="true">
+      <ellipse class="shellpath" cx="100" cy="132" rx="80" ry="106"/>
+      <path class="crack" d="M100 28 L86 70 L114 100 L84 134 L112 172 L88 208 L101 236"/>
+    </svg>
+    <p class="done-title">답이 봉인되었습니다</p>
+    <p class="done-sub">
+      당신의 여섯 답은 사회자에게만 보입니다.<br>
+      모임에서 네 사람의 답이 나란히 놓일 때<br>
+      비로소 알이 깨집니다.<br><br>
+      그날, 다시 만나요.
+    </p>
+  </section>
+
+  <!-- ===== 사회자 ===== -->
+  <section id="adminScreen" class="hidden">
+    <p class="eyebrow">Moderator Only</p>
+    <h1>사회자 화면</h1>
+    <svg class="crackline gold" viewBox="0 0 400 14" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 7 L120 7 L150 2 L175 11 L200 4 L230 9 L260 7 L400 7"/></svg>
+
+    <p class="sec-label">참가자 응답 현황</p>
+    <div id="personList"><div class="empty">불러오는 중…</div></div>
+
+    <p class="sec-label">함께 펼쳐 보기</p>
+    <button class="btn" onclick="startQView()">질문별로 네 사람의 답 펼치기</button>
+
+    <p class="sec-label">토론 진행</p>
+    <button class="btn amber" onclick="startTalk()">토론 모드 시작</button>
+
+    <button class="btn ghost" onclick="location.reload()" style="margin-top:24px;">처음으로</button>
+  </section>
+</div>
+
+<!-- ===== 어두운 오버레이 ===== -->
+<div id="stage" class="hidden"></div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script>
+/* =========================================================
+   1) Firebase 설정
+      animal-farm-test 프로젝트를 그대로 재사용합니다.
+      (컬렉션 이름이 demian 이라 동물농장 결과와 섞이지 않아요)
+      새 프로젝트를 쓰려면 아래 6줄만 교체하세요.
+   ========================================================= */
+const firebaseConfig = {
+  apiKey: "AIzaSyDHau8mAR5YHcKlZaUbFjNJr0C0yuW4OOE",
+  authDomain: "animal-farm-test.firebaseapp.com",
+  projectId: "animal-farm-test",
+  storageBucket: "animal-farm-test.firebasestorage.app",
+  messagingSenderId: "281615916806",
+  appId: "1:281615916806:web:4d8501dc23ed58826ec887"
+};
+/* 2) 사회자 비밀번호 */
+const ADMIN_PASS = "1234";
+const COLLECTION = "demian";
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+/* =========================================================
+   성찰 질문 (6)
+   ========================================================= */
+const QUESTIONS = [
+  { eyebrow:"두 세계",
+    q:"당신의 '밝은 세계'와 '어두운 세계'는 각각 무엇인가요?",
+    hint:"싱클레어는 경건한 가정(밝음)과 비밀·죄의식(어둠) 사이에서 자랍니다. 요즘 당신은 어느 쪽에 더 머물고 있나요?",
+    ph:"예) 나의 밝은 세계는…  나의 어두운 세계는…" },
+  { eyebrow:"알",
+    q:"지금 당신이 깨고 나와야 할 '알'은 무엇인가요?",
+    hint:"익숙하지만 이제는 벗어나고 싶은 세계, 나를 가두고 있는 껍데기.",
+    ph:"내가 깨야 할 껍데기는…" },
+  { eyebrow:"데미안",
+    q:"당신의 '데미안'은 누구(무엇)인가요?",
+    hint:"결정적인 순간 방향을 알려준 사람, 혹은 내 안의 목소리. 있었다면 어떤 순간이었나요?",
+    ph:"나에게 데미안 같은 존재는…" },
+  { eyebrow:"카인의 표식",
+    q:"남들과 달라서 거리감의 대상이 된 적 있나요? 그 '다름'은 약점이었나요, 표식이었나요?",
+    hint:"데미안은 카인을 악인이 아니라 '남다른 표식을 지녀 두려움의 대상이 된 자'로 읽습니다.",
+    ph:"나의 다름은…" },
+  { eyebrow:"교사로서",
+    q:"우리는 아이들에게 '밝은 세계'만 보여주고 있지는 않을까요?",
+    hint:"아이의 '어두운 면'(분노, 질투, 비밀)을 당신은 교실에서 어떻게 대하나요?",
+    ph:"아이의 어두운 면을 마주할 때 나는…" },
+  { eyebrow:"열린 질문",
+    q:"데미안은 실존 인물이었을까요, 싱클레어의 또 다른 자아였을까요?",
+    hint:"정답이 없는 질문입니다. 당신은 어떻게 읽었나요(또는 읽고 싶나요)? 그 근거는?",
+    ph:"내가 읽은 데미안은…" }
+];
+
+/* =========================================================
+   토론 주제 (6)
+   ========================================================= */
+const TOPICS = [
+  { eyebrow:"워밍업",
+    q:"첫인상, 그리고 한 문장",
+    lead:"본격적인 이야기에 앞서 가볍게 시작합니다.",
+    subs:["데미안을 다 읽고 난 첫 느낌을 한 단어로 말한다면?",
+          "가장 마음에 밑줄 그은 문장과 그 이유는?"] },
+  { eyebrow:"두 세계",
+    q:"밝음과 어둠, 그리고 우리",
+    lead:"싱클레어는 밝은 세계와 어두운 세계 사이에서 흔들립니다.",
+    subs:["우리는 정말 두 세계를 나눠 살고 있을까요?",
+          "어른이 된다는 건 어둠을 없애는 일일까요, 끌어안는 일일까요?"] },
+  { eyebrow:"아프락사스",
+    q:"알을 깨는 새, 선과 악을 함께 품기",
+    lead:"아프락사스는 신과 악마를 한 몸에 지닌 신입니다. 세상을 둘로 쪼개지 말라는 책의 핵심 사상.",
+    subs:["선과 악을 모두 끌어안는다는 게 현실에서 가능할까요?",
+          "'좋은 사람'이 되라는 교육은 아이에게 한쪽 세계만 가르치는 건 아닐까요?"] },
+  { eyebrow:"열린 질문 · 가장 뜨거운 주제",
+    q:"데미안은 실존인가, 또 다른 자아인가",
+    lead:"각자 6번 답을 꺼내 근거와 함께 이야기해 봅시다. 정답은 없습니다.",
+    subs:["거울 속에서 데미안을 본 마지막 장면, 어떻게 읽으셨나요?",
+          "데미안이 실재했다고 보는 쪽 / 내면의 자아라 보는 쪽, 각자의 근거는?",
+          "둘 중 무엇이든, 헤세가 말하려던 건 무엇이었을까요?"] },
+  { eyebrow:"카인의 표식",
+    q:"'다름'에 대하여",
+    lead:"표식을 지닌 자는 두려움의 대상이 되지만, 동시에 선택받은 자이기도 합니다.",
+    subs:["교실에서 '남다른 아이'를 우리는 어떻게 보고 있나요?",
+          "나의 '다름'이 약점이 아니라 표식이었던 순간이 있었나요?"] },
+  { eyebrow:"마무리",
+    q:"교실의 데미안, 그리고 오늘 가져갈 한 문장",
+    lead:"성장 소설을 교사의 자리에서 다시 읽습니다.",
+    subs:["우리 반 아이들에게 '데미안 같은 어른'이 되어 줄 수 있을까요?",
+          "오늘 모임에서 각자 가져가는 한 문장은?"] }
+];
+
+/* =========================================================
+   참가자 — 성찰 카드 작성
+   ========================================================= */
+let userName="", cIdx=0, draft=[];
+const $ = id => document.getElementById(id);
+
+function startCards(){
+  userName = $("nameInput").value.trim();
+  if(!userName){ alert("이름을 입력해주세요."); $("nameInput").focus(); return; }
+  cIdx=0; draft=new Array(QUESTIONS.length).fill("");
+  showScreen("cardScreen");
+  renderCard();
+}
+function renderCard(){
+  $("progressBar").innerHTML = QUESTIONS.map((_,i)=>
+    `<i class="${i===cIdx?'now':draft[i].trim()?'done':''}"></i>`).join("");
+  const q=QUESTIONS[cIdx];
+  const isLast = cIdx===QUESTIONS.length-1;
+  $("cardHolder").innerHTML = `
+    <div class="qcard">
+      <p class="q-eyebrow">${q.eyebrow}</p>
+      <p class="q-num">질문 ${cIdx+1} / ${QUESTIONS.length}</p>
+      <p class="q-text">${q.q}</p>
+      <p class="q-hint">${q.hint}</p>
+      <textarea id="ansBox" placeholder="${q.ph}">${esc(draft[cIdx])}</textarea>
+      <div class="navrow">
+        <button onclick="cardPrev()" ${cIdx===0?'disabled':''}>← 이전</button>
+        <button class="go" onclick="cardNext()">${isLast?'답 봉인하기':'다음 →'}</button>
+      </div>
+    </div>`;
+  window.scrollTo(0,0);
+}
+function saveDraft(){ const b=$("ansBox"); if(b) draft[cIdx]=b.value; }
+function cardPrev(){ saveDraft(); if(cIdx>0){ cIdx--; renderCard(); } }
+function cardNext(){
+  saveDraft();
+  if(cIdx < QUESTIONS.length-1){ cIdx++; renderCard(); return; }
+  const blanks = draft.filter(d=>!d.trim()).length;
+  if(blanks>0 && !confirm(`아직 비어 있는 질문이 ${blanks}개 있어요. 그대로 봉인할까요?`)) return;
+  submit();
+}
+async function submit(){
+  showScreen("doneScreen");
+  try{
+    await db.collection(COLLECTION).add({
+      name:userName, answers:draft,
+      ts:firebase.firestore.FieldValue.serverTimestamp()
+    });
+  }catch(e){
+    alert("저장에 실패했습니다. 사회자에게 알려주세요.\n"+e.message);
+  }
+}
+function showScreen(id){
+  ["startScreen","cardScreen","doneScreen","adminScreen"].forEach(s=>
+    $(s).classList.add("hidden"));
+  $(id).classList.remove("hidden");
+}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+
+/* =========================================================
+   사회자
+   ========================================================= */
+let roster=[]; // [{name, answers:[]}]
+async function openAdmin(){
+  const pw=prompt("사회자 비밀번호");
+  if(pw===null) return;
+  if(pw!==ADMIN_PASS){ alert("비밀번호가 다릅니다."); return; }
+  showScreen("adminScreen");
+  loadResults();
+}
+async function loadResults(){
+  const list=$("personList");
+  try{
+    const snap=await db.collection(COLLECTION).orderBy("ts","asc").get();
+    roster=[];
+    snap.forEach(doc=>{ const d=doc.data(); roster.push({id:doc.id, name:d.name, answers:d.answers||[]}); });
+    if(roster.length===0){
+      list.innerHTML=`<div class="empty">아직 응답이 없습니다.<br>링크를 공유해 주세요.</div>`;
+      return;
+    }
+    list.innerHTML="";
+    roster.forEach((r,i)=>{
+      const filled = (r.answers||[]).filter(a=>a&&a.trim()).length;
+      const el=document.createElement("div");
+      el.className="person";
+      el.innerHTML=`
+        <span class="pname">${esc(r.name)}</span>
+        <span class="pacts">
+          <button class="v">${filled}/${QUESTIONS.length} 보기</button>
+          <button class="d">삭제</button>
+        </span>`;
+      el.querySelector(".v").onclick=()=>startPersonView(i);
+      el.querySelector(".d").onclick=async()=>{
+        if(confirm(`${r.name} 응답을 삭제할까요?`)){
+          await db.collection(COLLECTION).doc(r.id).delete();
+          loadResults();
+        }
+      };
+      list.appendChild(el);
+    });
+  }catch(e){
+    list.innerHTML=`<div class="empty">불러오기 실패: ${esc(e.message)}</div>`;
+  }
+}
+
+/* ---- 개별 보기 : 한 사람의 6답 ---- */
+function startPersonView(i){
+  const r=roster[i];
+  const ov=$("stage"); ov.classList.remove("hidden");
+  ov.innerHTML=`<div class="st-inner">
+      <p class="st-eyebrow">개별 응답</p>
+      <p class="st-q">${esc(r.name)}</p>
+      ${QUESTIONS.map((q,qi)=>{
+        const a=(r.answers&&r.answers[qi])?r.answers[qi]:"";
+        return `<div class="ans">
+          <div class="who">${qi+1}. ${esc(q.q)}</div>
+          <div class="txt">${a.trim()?esc(a):'<span class="blank">— 비워둠 —</span>'}</div>
+        </div>`;
+      }).join("")}
+      <button class="st-close" onclick="closeStage()">닫기</button>
+    </div>`;
+  ov.scrollTop=0;
+}
+
+/* ---- 질문별 함께 보기 : 한 질문 + 네 사람의 답 ---- */
+let qvIdx=0;
+function startQView(){
+  if(roster.length===0){ alert("아직 응답이 없습니다."); return; }
+  qvIdx=0; renderQView();
+}
+function renderQView(){
+  const q=QUESTIONS[qvIdx];
+  const isLast = qvIdx===QUESTIONS.length-1;
+  const ov=$("stage"); ov.classList.remove("hidden");
+  ov.innerHTML=`<div class="st-inner">
+      <p class="st-eyebrow">${q.eyebrow} · 질문 ${qvIdx+1}/${QUESTIONS.length}</p>
+      <p class="st-q">${esc(q.q)}</p>
+      ${roster.map(r=>{
+        const a=(r.answers&&r.answers[qvIdx])?r.answers[qvIdx]:"";
+        return `<div class="ans">
+          <div class="who">${esc(r.name)}</div>
+          <div class="txt">${a.trim()?esc(a):'<span class="blank">— 비워둠 —</span>'}</div>
+        </div>`;
+      }).join("")}
+      <div class="st-nav">
+        <button onclick="qvPrev()" ${qvIdx===0?'disabled':''}>← 이전 질문</button>
+        <button class="go" onclick="${isLast?'closeStage()':'qvNext()'}">${isLast?'마치기':'다음 질문 →'}</button>
+      </div>
+      <button class="st-close" onclick="closeStage()">닫기</button>
+    </div>`;
+  ov.scrollTop=0;
+}
+function qvPrev(){ if(qvIdx>0){ qvIdx--; renderQView(); } }
+function qvNext(){ if(qvIdx<QUESTIONS.length-1){ qvIdx++; renderQView(); } }
+
+/* ---- 토론 모드 ---- */
+let tIdx=0;
+function startTalk(){ tIdx=0; renderTalk(); }
+function renderTalk(){
+  const t=TOPICS[tIdx];
+  const isLast = tIdx===TOPICS.length-1;
+  const ov=$("stage"); ov.classList.remove("hidden");
+  ov.innerHTML=`<div class="st-inner">
+      <p class="st-eyebrow">${t.eyebrow} · 주제 ${tIdx+1}/${TOPICS.length}</p>
+      <p class="st-q">${esc(t.q)}</p>
+      <p class="st-lead">${esc(t.lead)}</p>
+      <div class="st-subs">${t.subs.map(s=>`<p>${esc(s)}</p>`).join("")}</div>
+      <div class="st-nav">
+        <button onclick="talkPrev()" ${tIdx===0?'disabled':''}>← 이전 주제</button>
+        <button class="go" onclick="${isLast?'closeStage()':'talkNext()'}">${isLast?'토론 마치기':'다음 주제 →'}</button>
+      </div>
+      <button class="st-close" onclick="closeStage()">닫기</button>
+    </div>`;
+  ov.scrollTop=0;
+}
+function talkPrev(){ if(tIdx>0){ tIdx--; renderTalk(); } }
+function talkNext(){ if(tIdx<TOPICS.length-1){ tIdx++; renderTalk(); } }
+
+function closeStage(){ $("stage").classList.add("hidden"); $("stage").innerHTML=""; }
+</script>
+</body>
+</html>
