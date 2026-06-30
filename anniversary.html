@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>우리, 10년</title>
+
+<!-- =========================================================
+     ▼▼▼ 여기만 고치면 돼요 ▼▼▼
+     아래 letter(편지)와 promises(약속 10개)만 바꾸면 됩니다.
+     ========================================================= -->
+<script>
+const DATA = {
+  // 표지
+  coverTitle: "우리, 10년",
+  coverSub: "그리고 이제 셋이 되는 우리",
+  metDate: "2016. 06. 27",   // 처음 만난 날 (표지 표시용)
+  metDateISO: "2016-06-27",  // D+ 카운터 계산용 (YYYY-MM-DD)
+
+  // 배경음악 파일명 (이 HTML과 같은 폴더에 mp3 넣기)
+  bgmFile: "geurim.mp3",
+
+  // 편지 (줄바꿈은 자유롭게)
+  letterTo: "사랑하는 혜진이에게",
+  letterBody: `10년 전 너를 처음 만났을 때 우리의 만남이 10년이 넘어갈지는 상상도 못했어.
+
+하지만 10년이라는 시간 동안 우리는 서로 함께 기쁘기도 하고 서로에게 화가 나기도 하고 슬프기도 한 일들이 엄청 많이 쌓여왔어.
+
+지금은 우리가 각자 살아왔던 날만큼은 아니지만 함께한 시간들이 늘어나면서 서로가 이해하지 못한 것들을 조금씩 더 이해하고 인정하면서 더 깊은 관계가 되어가고 있는 것 같아. 서로의 생각이 때로는 너무 비슷해서 소름끼칠 때도 있지만 그럼에도 불구하고 아직도 생각이 너무나 달라서 힘든 부분도 남아있지.
+
+이번 기념일에도 서로의 생각이 많이 달라서.. 그리고 내가 그걸 제대로 인정하지 못해서 혜진이에게 꽤나 긴 시간동안 힘든 시간을 주게 된 것 같아. 사랑하는 혜진이에게 조금이라도 힘든 시간을 주고 싶지 않았다면 내가 그 상황을 좀 더 적극적으로 혜진이에게 다가가서 해결했어야 했는데 결국 회피하다 혜진이를 고통의 시간으로 밀어넣었지.
+
+참 바보같아. 항상 똑같은 잘못을 반복하면서 고쳐지지 않는 나의 모습. 앞으로는 혜진이와 찰떡이를 이끌어가는 좋은 가장이 되어야 하는데 아직도 부족한 모습을 많이 보이다니..
+
+나는 정말 혜진이에게 좋은 남편, 찰떡이에게 좋은 아빠가 되고 싶어. 운동도 열심히 하고 먹는 것도 건강하게 먹고 집안일도 꼼꼼하고 깔끔하게 잘하고 싶고 혜진이 아침에 깨우는 것도 마법처럼 기분좋고 빠르게 깨우고 싶고 혜진이 감정도 빠르고 진정성있게 공감하고 싶고 혜진이 말도 한번에 알아듣고 반응하고 싶고.. 정말 노력하는 모습이 아니라 잘하고 싶은데. 혜진이한테 정말 좋은 모습만 보이고 싶은데 그러지 못해서..ㅠㅠ
+
+늘 혜진이에게 감사하기로 한 마음 잊지 않으면서 10년이 지나도 20년이 지나도 30년이 지나도 행복하게 살고 싶어.
+
+늦었지만 내 진심을 전하고 싶었어.
+지난 10년간 혜진이랑 함께라서 행복했고,
+앞으로의 10년은 더 단단하게 곁에 있을게.
+
+곧 태어날 우리 아이에게도
+이렇게 좋은 사람이 엄마라서
+정말 다행이라고 말해주고 싶어.`,
+  letterFinale: `평생 사랑해 혜진아♡
+찰떡이랑 행복하게 살아보자!`,
+  letterFrom: "혜진이의 영원한 남편 상훈오빠가",
+
+  // 약속 10개
+  promises: [
+    "화날 때 입 다물고 도망가지 않고,\n끝까지 같이 이야기할게.",
+    "네가 만들어준 앨범처럼,\n나도 우리 순간들을 자주 기록할게.",
+    "기념일에 꽃·편지·케이크로 돌려막기 하지 않을게.\n매번 새롭게 고민할게.",
+    "이제 육아는 내가 맡을게. 너는 푹 쉬어.\n웬만한 건 거의 다 내가 할게.",
+    "사소한 것에도 자주, 또박또박\n고맙다고 표현할게.",
+    "아이 앞에서 너를\n늘 존중하는 모습으로 대할게.",
+    "1년에 한 번은,\n둘만의 시간을 꼭 만들게.",
+    "네 감정을 빠르게, 진심으로 공감할게.\n네 마음을 가장 먼저 살필게.",
+    "운동 열심히 하고 건강하게 먹을게.\n오래오래 네 옆에 있으려고.",
+    "다음 10년도, 그다음 10년도\n— 너랑 함께 할게.",
+  ],
+
+  // 마무리
+  endTitle: "다음 10년도, 너랑.",
+  endSub: "— 우리 셋이 함께",
+  // 찰떡이(태명) 한 줄 — 약속 카드 다음에 등장
+  chaltteokLine: "아빠, 약속 10개 잘 봤어요.\n어기면 내가 다 일러바칠 거예요.\n엄마, 우리 같은 편이죠? 😎",
+  chaltteokFrom: "— 찰떡이가",
+
+  // 와인 (사진은 나중에 추가: wine.jpg를 같은 폴더에 넣기)
+  wineFile: "wine.png",
+  wineCaption: "이 와인은, 네가 다시 한잔할 수 있는 날 같이 열자.",
+};
+</script>
+<!-- =========================================================
+     ▲▲▲ 여기까지만 고치면 돼요 ▲▲▲
+     ========================================================= -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --cream:#F2E9DB;
+  --cream-2:#EADFCB;
+  --paper:#FDFAF3;
+  --ink:#3D332A;
+  --ink-soft:#6B5D4E;
+  --rose:#B06B63;
+  --rose-deep:#8F524B;
+  --gold:#C2A05E;
+  --line:#DCCBB0;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{
+  font-family:"Nanum Myeongjo",serif;
+  background:
+    radial-gradient(1200px 600px at 50% -10%, #F8F1E4 0%, transparent 60%),
+    var(--cream);
+  color:var(--ink);
+  -webkit-font-smoothing:antialiased;
+  overflow:hidden;
+}
+.hand{font-family:"Gaegu",cursive;}
+
+/* 화면 전환 */
+.scene{
+  position:fixed; inset:0;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  padding:28px;
+  opacity:0; visibility:hidden; transform:translateY(12px);
+  transition:opacity .8s ease, transform .8s ease, visibility .8s;
+}
+.scene.active{opacity:1; visibility:visible; transform:translateY(0)}
+
+/* ---------- 표지 ---------- */
+#cover .met{
+  font-family:"Gaegu",cursive; color:var(--rose);
+  letter-spacing:.18em; font-size:.95rem; margin-bottom:18px;
+  border:1px solid var(--line); border-radius:999px; padding:7px 18px;
+  background:rgba(253,250,243,.5);
+}
+#cover h1{
+  font-weight:800; font-size:clamp(2.6rem,9vw,4.6rem);
+  line-height:1.15; letter-spacing:-.01em; text-align:center;
+}
+#cover h1 .amp{
+  font-family:"Gaegu",cursive; color:var(--gold); font-weight:700;
+  display:inline-block; transform:translateY(2px);
+}
+#cover .sub{
+  margin-top:18px; color:var(--ink-soft); font-size:clamp(1rem,3.5vw,1.2rem);
+  text-align:center;
+}
+.start{
+  margin-top:46px; cursor:pointer; border:none; background:none;
+  font-family:"Gaegu",cursive; font-size:1.25rem; color:var(--ink);
+  display:flex; flex-direction:column; align-items:center; gap:10px;
+}
+.start .btn{
+  padding:14px 34px; border-radius:999px;
+  background:var(--rose); color:#FDFAF3;
+  box-shadow:0 8px 24px rgba(143,82,75,.28);
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+.start:hover .btn{transform:translateY(-3px); box-shadow:0 14px 30px rgba(143,82,75,.34)}
+.start small{color:var(--ink-soft); font-size:.95rem}
+
+/* ---------- 편지 ---------- */
+#letter{justify-content:center}
+.envelope{
+  position:relative; width:min(340px,80vw); aspect-ratio:7/5;
+  cursor:pointer; transition:transform .4s ease;
+}
+.envelope:hover{transform:translateY(-4px)}
+.env-body{
+  position:absolute; inset:0; border-radius:10px;
+  background:linear-gradient(160deg,#F6ECDA,#E7D7BC);
+  box-shadow:0 18px 40px rgba(90,70,45,.22);
+  border:1px solid var(--line);
+}
+.env-flap{
+  position:absolute; top:0; left:0; right:0; height:62%;
+  background:linear-gradient(160deg,#EFE2C9,#DCC8A4);
+  clip-path:polygon(0 0,100% 0,50% 100%);
+  transform-origin:top; transition:transform .6s ease;
+  z-index:3; border-radius:10px 10px 0 0;
+}
+.env-seal{
+  position:absolute; top:48%; left:50%; transform:translate(-50%,-50%);
+  width:54px; height:54px; border-radius:50%; z-index:4;
+  background:radial-gradient(circle at 35% 30%,#C77F77,var(--rose-deep));
+  box-shadow:0 4px 10px rgba(0,0,0,.2);
+  display:flex; align-items:center; justify-content:center;
+  font-family:"Gaegu",cursive; color:#FDF3EF; font-size:1.4rem;
+  transition:opacity .3s ease;
+}
+.env-hint{
+  position:absolute; bottom:-46px; left:0; right:0; text-align:center;
+  font-family:"Gaegu",cursive; color:var(--ink-soft); font-size:1.05rem;
+  animation:bob 1.8s ease-in-out infinite;
+}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+.envelope.open .env-flap{transform:rotateX(180deg)}
+.envelope.open .env-seal{opacity:0}
+.envelope.open .env-hint{opacity:0}
+
+.letter-paper{
+  position:fixed; inset:0; margin:auto;
+  width:min(560px,90vw); max-height:86vh; overflow:auto;
+  background:
+    repeating-linear-gradient(transparent,transparent 37px,#EFE6D4 38px),
+    var(--paper);
+  border:1px solid var(--line); border-radius:6px;
+  box-shadow:0 30px 70px rgba(80,60,40,.3);
+  padding:42px clamp(26px,6vw,52px);
+  opacity:0; transform:scale(.92) translateY(20px); pointer-events:none;
+  transition:opacity .6s ease, transform .6s ease;
+  z-index:20;
+}
+.letter-paper.show{opacity:1; transform:scale(1) translateY(0); pointer-events:auto}
+.letter-paper .to{font-family:"Gaegu",cursive; font-size:1.5rem; color:var(--rose-deep); margin-bottom:22px}
+.letter-paper .body{font-size:1.05rem; line-height:2.35rem; white-space:pre-wrap; color:var(--ink)}
+.letter-paper .from{font-family:"Gaegu",cursive; font-size:1.35rem; text-align:right; margin-top:30px; color:var(--ink)}
+.letter-paper .finale{
+  margin-top:28px; text-align:center; color:var(--rose-deep);
+  font-size:1.7rem; line-height:2.5rem; white-space:pre-wrap;
+  padding:20px 0; border-top:1px dashed var(--line); border-bottom:1px dashed var(--line);
+}
+.letter-next{
+  display:block; margin:30px auto 4px; cursor:pointer; border:none;
+  background:var(--rose); color:#FDFAF3; font-family:"Gaegu",cursive;
+  font-size:1.1rem; padding:11px 28px; border-radius:999px;
+  box-shadow:0 8px 20px rgba(143,82,75,.26);
+}
+
+/* ---------- 약속 카드 ---------- */
+#promise h2{
+  font-family:"Gaegu",cursive; color:var(--rose); font-size:1.3rem;
+  margin-bottom:6px; letter-spacing:.04em;
+}
+#promise .pcount{color:var(--ink-soft); font-size:.95rem; margin-bottom:24px}
+.card{
+  position:relative; width:min(420px,86vw); min-height:300px;
+  background:var(--paper); border:1px solid var(--line); border-radius:18px;
+  box-shadow:0 22px 50px rgba(80,60,40,.2);
+  padding:40px 34px; display:flex; flex-direction:column; justify-content:center;
+  text-align:center;
+}
+.card .num{
+  font-family:"Gaegu",cursive; color:var(--gold); font-size:1.1rem;
+  letter-spacing:.2em; margin-bottom:18px;
+}
+.card .num b{font-size:2.6rem; color:var(--rose); display:block; line-height:1}
+.card .text{font-size:1.2rem; line-height:2.1rem; color:var(--ink); white-space:pre-wrap}
+.card.flip{animation:flipIn .5s ease}
+@keyframes flipIn{
+  from{opacity:0; transform:translateY(14px) rotate(-1deg)}
+  to{opacity:1; transform:translateY(0) rotate(0)}
+}
+.dots{display:flex; gap:7px; margin:22px 0 18px; flex-wrap:wrap; justify-content:center; max-width:280px}
+.dots span{width:8px; height:8px; border-radius:50%; background:var(--line); transition:background .3s, transform .3s}
+.dots span.on{background:var(--rose); transform:scale(1.25)}
+.nav{display:flex; gap:14px; align-items:center}
+.nav button{
+  cursor:pointer; border:1px solid var(--line); background:var(--paper);
+  width:50px; height:50px; border-radius:50%; font-size:1.2rem; color:var(--ink);
+  transition:background .25s, transform .2s;
+}
+.nav button:hover:not(:disabled){background:var(--cream-2); transform:translateY(-2px)}
+.nav button:disabled{opacity:.35; cursor:default}
+.nav .go{
+  width:auto; padding:0 26px; border-radius:999px; background:var(--rose);
+  color:#FDFAF3; font-family:"Gaegu",cursive; font-size:1.05rem; border:none;
+  box-shadow:0 8px 20px rgba(143,82,75,.26);
+}
+
+/* ---------- 마무리 ---------- */
+#end h2{font-weight:800; font-size:clamp(2rem,7vw,3.2rem); text-align:center; line-height:1.25}
+#end .es{margin-top:18px; font-family:"Gaegu",cursive; color:var(--rose); font-size:1.3rem}
+#end .heart{font-size:2.6rem; color:var(--rose); margin-bottom:22px; animation:beat 1.6s ease-in-out infinite}
+@keyframes beat{0%,100%{transform:scale(1)}25%{transform:scale(1.18)}40%{transform:scale(1)}}
+#end .replay, #wine .replay{
+  margin-top:24px; cursor:pointer; border:none; background:none;
+  font-family:"Gaegu",cursive; color:var(--ink-soft); font-size:1rem;
+  text-decoration:underline; text-underline-offset:5px;
+}
+
+/* ---------- 와인 장면 ---------- */
+#wine{justify-content:center}
+.wine-photo{
+  width:min(340px,76vw); aspect-ratio:3/4; border-radius:14px; overflow:hidden;
+  background:var(--paper); border:1px solid var(--line);
+  box-shadow:0 22px 50px rgba(80,60,40,.24);
+  display:flex; align-items:center; justify-content:center;
+}
+.wine-photo img{width:100%; height:100%; object-fit:cover; display:block}
+.wine-placeholder{
+  text-align:center; color:var(--ink-soft); font-size:2.6rem; line-height:1.7;
+}
+.wine-placeholder small{font-size:.85rem; font-family:"Gaegu",cursive}
+.wine-caption{
+  margin-top:26px; text-align:center; color:var(--rose-deep);
+  font-size:1.4rem; line-height:2rem; max-width:340px;
+}
+
+/* ---------- BGM 버튼 ---------- */
+#bgm{
+  position:fixed; top:18px; right:18px; z-index:50;
+  width:46px; height:46px; border-radius:50%; cursor:pointer;
+  border:1px solid var(--line); background:rgba(253,250,243,.8);
+  backdrop-filter:blur(6px); font-size:1.15rem; color:var(--ink);
+  display:flex; align-items:center; justify-content:center;
+  transition:transform .2s, background .25s;
+}
+#bgm:hover{transform:scale(1.06)}
+
+/* D+ 카운터 */
+.dcount{
+  margin-top:22px; font-family:"Gaegu",cursive; color:var(--ink-soft);
+  font-size:1.05rem; text-align:center; line-height:1.5;
+}
+.dcount b{
+  display:block; font-size:2.1rem; color:var(--rose-deep); font-weight:700;
+  letter-spacing:.02em;
+}
+
+/* 찰떡이 화면 */
+#chal{justify-content:center}
+.chal-belly{font-size:3rem; margin-bottom:24px; animation:beat 1.8s ease-in-out infinite}
+.chal-line{
+  text-align:center; color:var(--rose-deep); font-size:1.6rem; line-height:2.4rem;
+  white-space:pre-wrap; max-width:340px;
+}
+.chal-from{margin-top:20px; color:var(--ink-soft); font-size:1.2rem}
+#chal .letter-next{margin-top:36px}
+
+/* 꽃잎 */
+.petal{position:fixed; top:-40px; pointer-events:none; z-index:5; opacity:.65;
+  font-size:18px; animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(360deg); opacity:0}}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important; transition:opacity .2s linear!important}
+}
+</style>
+</head>
+<body>
+
+<button id="bgm" aria-label="배경음악 켜기/끄기">♪</button>
+
+<!-- 표지 -->
+<section class="scene active" id="cover">
+  <div class="met" id="metDate"></div>
+  <h1 id="coverTitle"></h1>
+  <p class="sub" id="coverSub"></p>
+  <div class="dcount" id="dcount"></div>
+  <button class="start" id="startBtn">
+    <span class="btn">열어보기</span>
+    <small>편지가 도착했어요</small>
+  </button>
+</section>
+
+<!-- 편지 -->
+<section class="scene" id="letter">
+  <div class="envelope" id="envelope">
+    <div class="env-body"></div>
+    <div class="env-flap"></div>
+    <div class="env-seal">♥</div>
+    <div class="env-hint">봉투를 눌러보세요</div>
+  </div>
+  <div class="letter-paper" id="letterPaper">
+    <div class="to" id="lTo"></div>
+    <div class="body" id="lBody"></div>
+    <div class="finale hand" id="lFinale"></div>
+    <div class="from" id="lFrom"></div>
+    <button class="letter-next" id="toPromise">약속 보러 가기 →</button>
+  </div>
+</section>
+
+<!-- 약속 카드 -->
+<section class="scene" id="promise">
+  <h2>다음 10년, 너에게 하는 약속</h2>
+  <div class="pcount" id="pCount"></div>
+  <div class="card" id="card">
+    <div class="num">약속 <b id="cNum">01</b></div>
+    <div class="text" id="cText"></div>
+  </div>
+  <div class="dots" id="dots"></div>
+  <div class="nav">
+    <button id="prev" aria-label="이전">←</button>
+    <button id="next" aria-label="다음">→</button>
+    <button class="go" id="toEnd" style="display:none">다 봤어요 ♥</button>
+  </div>
+</section>
+
+<!-- 찰떡이 -->
+<section class="scene" id="chal">
+  <div class="chal-belly">🤍</div>
+  <p class="chal-line hand" id="chalLine"></p>
+  <p class="chal-from hand" id="chalFrom"></p>
+  <button class="letter-next" id="chalNext">마지막으로 →</button>
+</section>
+
+<!-- 마무리 -->
+<section class="scene" id="end">
+  <div class="heart">♥</div>
+  <h2 id="endTitle"></h2>
+  <div class="es" id="endSub"></div>
+  <button class="letter-next" id="toWine" style="margin-top:34px">우리 와인 보기 🍷</button>
+  <button class="replay" id="replay">처음부터 다시 보기</button>
+</section>
+
+<!-- 와인 -->
+<section class="scene" id="wine">
+  <div class="wine-photo" id="winePhoto">
+    <div class="wine-placeholder" id="winePlaceholder">🍷<br><small>와인 사진이 들어갈 자리</small></div>
+  </div>
+  <p class="wine-caption hand" id="wineCaption"></p>
+  <button class="replay" id="replay2">처음부터 다시 보기</button>
+</section>
+
+<script>
+/* ---------- 데이터 주입 ---------- */
+metDate.textContent = DATA.metDate;
+coverTitle.innerHTML = DATA.coverTitle.replace("우리,", '우리<span class="amp">,</span>');
+coverSub.textContent = DATA.coverSub;
+lTo.textContent = DATA.letterTo;
+lBody.textContent = DATA.letterBody;
+lFinale.textContent = DATA.letterFinale;
+lFrom.textContent = DATA.letterFrom;
+endTitle.textContent = DATA.endTitle;
+endSub.textContent = DATA.endSub;
+chalLine.textContent = DATA.chaltteokLine;
+chalFrom.textContent = DATA.chaltteokFrom;
+wineCaption.textContent = DATA.wineCaption;
+
+// D+ 카운터: 만난 날부터 오늘까지
+(function(){
+  const start = new Date(DATA.metDateISO + "T00:00:00");
+  const today = new Date(); today.setHours(0,0,0,0);
+  const days = Math.floor((today - start) / 86400000);
+  const yrs = (days/365.25);
+  dcount.innerHTML = `우리가 함께한 날<b>${days.toLocaleString()}일</b><span style="font-size:.95rem;color:var(--ink-soft)">약 ${yrs.toFixed(1)}년째</span>`;
+})();
+// 와인 사진이 있으면 표시 (없으면 자리표시자 유지)
+(function(){
+  const img = new Image();
+  img.onload = ()=>{
+    winePlaceholder.style.display='none';
+    const el=document.createElement('img'); el.src=DATA.wineFile; el.alt='우리 와인';
+    winePhoto.appendChild(el);
+  };
+  img.src = DATA.wineFile;
+})();
+
+/* ---------- 화면 전환 ---------- */
+function go(id){
+  document.querySelectorAll('.scene').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+startBtn.onclick = ()=>{ go('letter'); startMusic(); };
+
+/* ---------- 편지 ---------- */
+const env = document.getElementById('envelope');
+env.onclick = ()=>{
+  if(env.classList.contains('open')) return;
+  env.classList.add('open');
+  setTimeout(()=>{
+    letterPaper.classList.add('show');
+    petalBurst(10);
+  }, 650);
+};
+toPromise.onclick = ()=>{ letterPaper.classList.remove('show'); go('promise'); renderCard(); };
+
+/* ---------- 약속 카드 ---------- */
+const P = DATA.promises;
+let idx = 0;
+const dots = document.getElementById('dots');
+P.forEach((_,i)=>{ const s=document.createElement('span'); dots.appendChild(s); });
+function renderCard(){
+  const card = document.getElementById('card');
+  cNum.textContent = String(idx+1).padStart(2,'0');
+  cText.textContent = P[idx];
+  pCount.textContent = `${idx+1} / ${P.length}`;
+  card.classList.remove('flip'); void card.offsetWidth; card.classList.add('flip');
+  [...dots.children].forEach((d,i)=>d.classList.toggle('on', i===idx));
+  prev.disabled = idx===0;
+  next.style.display = idx===P.length-1 ? 'none':'';
+  toEnd.style.display = idx===P.length-1 ? '':'none';
+}
+prev.onclick = ()=>{ if(idx>0){idx--; renderCard();} };
+next.onclick = ()=>{ if(idx<P.length-1){idx++; renderCard();} };
+toEnd.onclick = ()=>{ go('chal'); petalBurst(14); };
+chalNext.onclick = ()=>{ go('end'); petalBurst(18); };
+toWine.onclick = ()=>{ go('wine'); petalBurst(12); };
+function reset(){ idx=0; env.classList.remove('open'); letterPaper.classList.remove('show'); go('cover'); }
+replay.onclick = reset;
+replay2.onclick = reset;
+
+/* ---------- 꽃잎 ---------- */
+function petalBurst(n){
+  const marks=['❀','✿','♥','❁'];
+  for(let i=0;i<n;i++){
+    const p=document.createElement('div');
+    p.className='petal'; p.textContent=marks[i%marks.length];
+    p.style.left=Math.random()*100+'vw';
+    p.style.color=Math.random()>.5?'#B06B63':'#C2A05E';
+    p.style.fontSize=(14+Math.random()*16)+'px';
+    p.style.animationDuration=(4+Math.random()*3)+'s';
+    p.style.animationDelay=(Math.random()*0.6)+'s';
+    document.body.appendChild(p);
+    setTimeout(()=>p.remove(), 8000);
+  }
+}
+
+/* ---------- BGM (mp3 파일 재생) ---------- */
+const audio = new Audio(DATA.bgmFile);
+audio.loop = true;
+audio.volume = 0.0;
+let musicOn=false, fadeTimer;
+
+function fadeTo(target, ms){
+  clearInterval(fadeTimer);
+  const start=audio.volume, steps=24, step=(target-start)/steps;
+  let i=0;
+  fadeTimer=setInterval(()=>{
+    i++; audio.volume=Math.min(1,Math.max(0,start+step*i));
+    if(i>=steps) clearInterval(fadeTimer);
+  }, ms/steps);
+}
+function startMusic(){
+  if(musicOn) return;
+  audio.play().then(()=>{
+    musicOn=true; bgm.textContent='♫'; fadeTo(0.55, 1800);
+  }).catch(()=>{ bgm.textContent='♪'; }); // 자동재생 차단 시 버튼으로
+}
+bgm.onclick = ()=>{
+  if(musicOn){
+    fadeTo(0, 600); musicOn=false;
+    setTimeout(()=>audio.pause(), 650); bgm.textContent='♪';
+  }else{
+    audio.play().then(()=>{ musicOn=true; bgm.textContent='♫'; fadeTo(0.55,800); })
+                .catch(()=>{});
+  }
+};
+
+/* 키보드 좌우 넘김 */
+document.addEventListener('keydown',e=>{
+  if(!document.getElementById('promise').classList.contains('active')) return;
+  if(e.key==='ArrowLeft') prev.click();
+  if(e.key==='ArrowRight') next.click();
+});
+</script>
+</body>
+</html>
