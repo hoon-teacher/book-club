@@ -67,9 +67,10 @@ const DATA = {
   // 찰떡이(태명) 한 줄 — 약속 카드 다음에 등장
   chaltteokLine: "아빠, 약속 10개 잘 봤어요.\n어기면 내가 다 일러바칠 거예요.\n엄마, 우리 같은 편이죠? 😎",
   chaltteokFrom: "— 찰떡이가",
+  chalPhoto: "Chaltteok.jpeg",  // 초음파 사진
 
   // 와인 (사진은 나중에 추가: wine.jpg를 같은 폴더에 넣기)
-  wineFile: "wine.png",
+  wineFile: "Wine.png",
   wineCaption: "이 와인은, 네가 다시 한잔할 수 있는 날 같이 열자.",
 };
 </script>
@@ -311,6 +312,14 @@ body{
 /* 찰떡이 화면 */
 #chal{justify-content:center}
 .chal-belly{font-size:3rem; margin-bottom:24px; animation:beat 1.8s ease-in-out infinite}
+.chal-photo{
+  width:min(300px,72vw); aspect-ratio:4/3; margin-bottom:22px;
+  border-radius:12px; overflow:hidden; background:#1a1a1a;
+  border:6px solid var(--paper);
+  box-shadow:0 16px 40px rgba(80,60,40,.28);
+  transform:rotate(-2deg);
+}
+.chal-photo img{width:100%; height:100%; object-fit:cover; display:block}
 .chal-line{
   text-align:center; color:var(--rose-deep); font-size:1.6rem; line-height:2.4rem;
   white-space:pre-wrap; max-width:340px;
@@ -379,7 +388,7 @@ body{
 
 <!-- 찰떡이 -->
 <section class="scene" id="chal">
-  <div class="chal-belly">🤍</div>
+  <div class="chal-photo" id="chalPhoto"></div>
   <p class="chal-line hand" id="chalLine"></p>
   <p class="chal-from hand" id="chalFrom"></p>
   <button class="letter-next" id="chalNext">마지막으로 →</button>
@@ -416,6 +425,13 @@ endTitle.textContent = DATA.endTitle;
 endSub.textContent = DATA.endSub;
 chalLine.textContent = DATA.chaltteokLine;
 chalFrom.textContent = DATA.chaltteokFrom;
+// 찰떡이 초음파 사진
+(function(){
+  const img=new Image();
+  img.onload=()=>{ const el=document.createElement('img'); el.src=DATA.chalPhoto; el.alt='찰떡이'; chalPhoto.appendChild(el); };
+  img.onerror=()=>{ chalPhoto.style.display='none'; };
+  img.src=DATA.chalPhoto;
+})();
 wineCaption.textContent = DATA.wineCaption;
 
 // D+ 카운터: 만난 날부터 오늘까지
